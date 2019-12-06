@@ -27,11 +27,11 @@ lengths.append(99999999999999999999999999999999999999999999999999999999999999999
 stepsTaken = 0
 for inputSet in inputLine:
 	allWires.append([])
-	for input in inputSet.split(","):
-		allWires[len(allWires)-1] = doNextStep(allWires[len(allWires)-1], input)
+	for inputs in inputSet.split(","):
+		allWires[len(allWires)-1] = doNextStep(allWires[len(allWires)-1], inputs)
 for mainPoint in allWires[0]:
 	stepsTaken = stepsTaken+1
-	print(mainPoint)
+	#print(mainPoint)
 	length = abs(int(mainPoint.split(",")[0].strip()) + int(mainPoint.split(",")[1].strip()))
 	match = True
 	stepsOtherWires = 0
@@ -40,14 +40,14 @@ for mainPoint in allWires[0]:
 			match = False
 		else:
 			#add the position of that value in otherwire to the stepsOtherWires value
-			stepsOtherWires += otherWire.index(mainPoint)
+			stepsOtherWires += otherWire.index(mainPoint) + 1
 	if match:
 		print("found match!!!")
 		crosses.append(mainPoint)
 		lengths.append(length)
 		stepsToGetThere.append(stepsTaken + stepsOtherWires)
-#	for point in allWires[len(allWires)-1]:
-#		print(point)
+		print("First wire is on step " + str(stepsTaken) + " and the second wire is on step " + str(stepsOtherWires))
 print(crosses)
 print(lengths)
 print(stepsToGetThere)
+print("The smallest combined length is " + str(min(stepsToGetThere)))
